@@ -1,0 +1,7 @@
+=== Contextual fear Conditioning 統計解析結果 ===
+
+     Source           SS  DF1  DF2           MS         F        p_unc    p_GG_corr      np2      eps sphericity  W_spher  p_spher
+      Group   113.542654    2   21    56.771327  0.149701 8.618761e-01          NaN 0.014057      NaN        NaN      NaN      NaN
+       Time 84911.381358    5  105 16982.276272 88.603689 4.591280e-36 3.535584e-24 0.808401 0.631812      False 0.157955 0.000401
+Interaction  2943.335216   10  105   294.333522  1.535662 1.369809e-01          NaN 0.127593      NaN        NaN      NaN      NaN
+
