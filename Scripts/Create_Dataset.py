@@ -32,7 +32,6 @@ def read_freezing_data(files, type = "FC"):
             warnings.filterwarnings("ignore", message=".*OLE2 inconsistency.*")
         df = pd.read_excel(file)
         
-        col4 = pd.to_numeric(df.iloc[:, 3], errors="coerce")  # 4列目（D列）
         col5 = pd.to_numeric(df.iloc[:, 4], errors="coerce")  # 5列目（E列）
         bins_Ex = [ # 3分毎のbinの範囲とラベル
             (3, 8, "3"),
@@ -42,18 +41,19 @@ def read_freezing_data(files, type = "FC"):
             (27, 32, "15"),
         ]
         if type == "FC":
-            FC_data =(
-            col4.iloc[2:8]
-            .assign(
-            No = lambda df: Path(file).stem, # No列にpathからファイル名を抽出して追加
-            Group = lambda df: infer_group(Path(file).stem), # グループを推測して追加
-            Time  = lambda df: list(range(1, len(df) + 1)), # Time列に1から行数までの連番を追加
-            )
-            .assign(Freezing = lambda df: df['Interval.3'] / 60 * 100 ) # Freezing Time (%) を計算し列に追加
-            .iloc[:, 1:5] 
-            )
-            
-            rows.append(FC_data) # データフレームをリストに追加
+            for time_label in range(1, 7):
+                freezing = (
+                    col5.iloc[2 + (time_label - 1)  : 2 + time_label]
+                    .astype(float) # 数値に変換
+                    .mul(100 / 60) # 60秒ごとのデータをパーセントに変換
+                    .iloc[0] # 1つの値を取得
+                )
+                rows.append({
+                    "No": Path(file).stem, # ファイル名を追加
+                    "Group": infer_group(Path(file).stem), # グループを推測して追加
+                    "Time": time_label, # ラベルを追加
+                    "Freezing": freezing
+                })
 
         elif type == "per3":
             for start, end, time_label in bins_Ex: # 3分毎のbinごとにデータを処理
@@ -68,7 +68,6 @@ def read_freezing_data(files, type = "FC"):
                     "Group": infer_group(Path(file).stem),  
                     "Time": time_label,      # ラベルを追加
                     "Freezing": freezing,    # 平均値を追加
-                
                 })
         else :
             values = []
