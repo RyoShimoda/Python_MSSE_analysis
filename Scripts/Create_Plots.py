@@ -295,6 +295,18 @@ def plot_group_bar_jitter_sig(
     ax.set_ylim(*ylim)
     ax.set_yticks(np.arange(0, 101, 20)) # 目盛りは 0~100 まで表示
 
+    # y軸ラベルをデータ座標 (0:100) の中心に配置する
+    try:
+        ymin, ymax = ax.get_ylim()
+        center_data = 50
+        y_frac = (center_data - ymin) / (ymax - ymin) if ymax != ymin else 0.5
+        ylab = ax.yaxis.get_label()
+        ylab.set_verticalalignment("center")
+        # 左側に少しオフセットして配置（必要に応じて値を調整）
+        ax.yaxis.set_label_coords(-0.2, y_frac)
+    except Exception:  # noqa: BLE001, S110
+        pass
+
     ax.tick_params(axis="both", labelsize=11)
     for label in ax.get_xticklabels() + ax.get_yticklabels():
         label.set_fontproperties(FONT_PROP)
@@ -306,6 +318,7 @@ def plot_group_bar_jitter_sig(
     ax.spines["left"].set_linewidth(1.2)
     ax.spines["bottom"].set_linewidth(1.2)
 
+    
     plt.tight_layout()
 
     # 保存処理（高解像度 PNG / PDF / TIFF）
@@ -392,6 +405,17 @@ def plot_group_boxplot_sig(
     ax.set_title(title, fontsize=14, fontfamily="Times New Roman", pad=10)
     ax.set_ylim(*ylim)
     ax.set_yticks(np.arange(0, 101, 20)) # 目盛りは 0~100 まで表示
+
+    # y軸ラベルをデータ座標 (0:100) の中心に配置する
+    try:
+        ymin, ymax = ax.get_ylim()
+        center_data = 50
+        y_frac = (center_data - ymin) / (ymax - ymin) if ymax != ymin else 0.5
+        ylab = ax.yaxis.get_label()
+        ylab.set_verticalalignment("center")
+        ax.yaxis.set_label_coords(-0.2, y_frac)
+    except Exception:  # noqa: BLE001, S110
+        pass
 
     ax.tick_params(axis="both", labelsize=11)
     for label in ax.get_xticklabels() + ax.get_yticklabels():
