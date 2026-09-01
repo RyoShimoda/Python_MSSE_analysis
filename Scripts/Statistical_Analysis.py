@@ -165,7 +165,12 @@ def generate_anovakun_report(data, title="Contextual Fear Extinction", filename=
     # ③ 一元配置分散分析 (One-way ANOVA)
     p("\n--- 一元配置分散分析 (One-way ANOVA) ---")
     p(aov_1w.to_string(index=False))
-    
+    if aov_1w.loc[aov_1w['Source'] == 'Group', 'p_unc'].values[0] < 0.05:
+        p("\n 群間の有意差が認められたため、群間の多重比較を実施。")
+        # ④ 群間の多重比較 (Tukey法)
+        p("\n--- 群間の多重比較 (Tukey法) ---")
+        p(pg.pairwise_tukey(data=sum_df, dv='Freezing', between='Group').to_string())
+
     # ---------------------------------------------------------
     # 6. レポートの画面表示 ＆ txtファイルへの保存
     # ---------------------------------------------------------
