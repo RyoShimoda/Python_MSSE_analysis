@@ -313,8 +313,8 @@ def plot_group_bar_jitter_sig(
         base_path = Path(save_path)
         base_path.parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(base_path.with_suffix(".png"), dpi=300, bbox_inches="tight")
-        plt.savefig(base_path.with_suffix(".pdf"), dpi=300, bbox_inches="tight")
-        plt.savefig(base_path.with_suffix(".tiff"), dpi=300, bbox_inches="tight")
+        # plt.savefig(base_path.with_suffix(".pdf"), dpi=300, bbox_inches="tight")
+        # plt.savefig(base_path.with_suffix(".tiff"), dpi=300, bbox_inches="tight")
         print(f"[保存完了] {base_path.with_suffix('.png').resolve()}")
 
     return fig, ax
@@ -410,8 +410,8 @@ def plot_group_boxplot_sig(
         base_path = Path(save_path)
         base_path.parent.mkdir(parents=True, exist_ok=True)
         plt.savefig(base_path.with_suffix(".png"), dpi=300, bbox_inches="tight")
-        plt.savefig(base_path.with_suffix(".pdf"), dpi=300, bbox_inches="tight")
-        plt.savefig(base_path.with_suffix(".tiff"), dpi=300, bbox_inches="tight")
+        # plt.savefig(base_path.with_suffix(".pdf"), dpi=300, bbox_inches="tight")
+        # plt.savefig(base_path.with_suffix(".tiff"), dpi=300, bbox_inches="tight")
         print(f"[保存完了] {base_path.with_suffix('.png').resolve()}")
 
     return fig, ax
