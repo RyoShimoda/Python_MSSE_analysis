@@ -155,7 +155,7 @@ def generate_anovakun_report(data, title="Contextual Fear Extinction", filename=
     # ---------------------------------------------------------
     # 5. 棒グラフ、箱ひげ図用 (15分間平均値の一元配置分散分析 & 前提条件検定)
     # ---------------------------------------------------------
-    p("\n<< 4. 箱ひげ図用: 15分間平均値の一元配置分散分析 & 前提条件 >>")
+    p("\n<< 4. 棒グラフ、箱ひげ図用: 15分間平均値の一元配置分散分析 & 前提条件 >>\n")
     # ① 正規性の検定 (Shapiro-Wilk)
     p("--- 正規性の検定 (Shapiro-Wilk) ---")
     p(pg.normality(data=sum_df, dv='Freezing', group='Group').to_string())
