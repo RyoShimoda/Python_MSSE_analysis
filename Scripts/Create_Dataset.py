@@ -1,5 +1,7 @@
 # For Fear Extinction 
 
+import contextlib
+import os
 import warnings
 from pathlib import Path
 
@@ -27,10 +29,12 @@ def read_freezing_data(files, type = "FC"):
     rows = [] # 空のリストを作成して、各ファイルのデータを格納
 
     for file in files:
-        # 旧 .xls では pandas で警告が出ることがあるので抑制
+        # 旧 .xls では pandas/xlrd が stderr に直接 WARNING を出すことがあるため抑制
         with warnings.catch_warnings():
             warnings.filterwarnings("ignore", message=".*OLE2 inconsistency.*")
-        df = pd.read_excel(file)
+            with open(os.devnull, "w") as devnull:  # noqa: SIM117
+                with contextlib.redirect_stderr(devnull):
+                    df = pd.read_excel(file)
         
         col5 = pd.to_numeric(df.iloc[:, 4], errors="coerce")  # 5列目（E列）
         bins_Ex = [ # 3分毎のbinの範囲とラベル
@@ -80,13 +84,13 @@ def read_freezing_data(files, type = "FC"):
                 )
                 values.append(freezing)
 
-                overall_freezing = np.mean(values) if values else np.nan
+            overall_freezing = np.mean(values) if values else np.nan
 
-                rows.append({
-                    "No": Path(file).stem,
-                    "Group": infer_group(Path(file).stem),
-                    "Freezing": overall_freezing,
-                })
+            rows.append({
+                "No": Path(file).stem,
+                 "Group": infer_group(Path(file).stem),
+                 "Freezing": overall_freezing,
+            })
 
     return pd.DataFrame(rows)
 
