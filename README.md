@@ -65,4 +65,12 @@ MSSE論文の実験の内容の一部になりますが、ラットに恐怖条�
 - **OS:** Windows 11
 - **Python version:** 3.14.7
 
-## 
+### 使用パッケージ
+- numpy>=1.26
+- pandas>=2.1
+- matplotlib>=3.8
+- seaborn>=0.13
+- scipy>=1.11
+- pingouin>=0.5
+- openpyxl>=3.1
+
