@@ -72,6 +72,9 @@ MSSE論文の実験の内容の一部になりますが、ラットに恐怖条�
 - pingouin>=0.5
 - openpyxl>=3.1
 
+### 適用した統計手法
+正規性の検定（Shapilo-Wilk検定）、等分散性の検定（Levene検定）、球面性検定（Mendoza）と自由度の調整（Greenhouse-Geisser）、くり返しのある二元配置分散分析、繰り返しのない一元配置分散分析、多重比較（Shaffer、Tukey）
+
 ## 関連情報
 - **掲載論文 (DOI):**[ Accelerated Fear Extinction by Regular Light-Intensity Exercise: A Possible Role of Hippocampal BDNF-TrkB Signaling. ](https://doi.org/10.1249/mss.0000000000003312)
 - **著者:** [Ryo Shimoda](https://orcid.org/0000-0002-9123-0703); YUKI AMAYA; MASAHIRO OKAMOTO; SHINGO SOYA; MARIKO SOYA; HIKARU KOIZUMI; KENGO NAKAMURA; TAICHI HIRAGA; FERENC TORMA; HIDEAKI SOYA
